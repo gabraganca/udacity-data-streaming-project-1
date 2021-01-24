@@ -31,8 +31,7 @@ class Producer:
         self.num_replicas = num_replicas
 
         self.broker_properties = {
-            "bootstrap.servers": "PLAINTEXT://kafka0:9092",
-            "schema.registry.url": "http://schema-registry:8081/",
+            "bootstrap.servers": "PLAINTEXT://localhost:9092",
         }
 
         # If the topic does not already exist, try to create it
@@ -41,7 +40,10 @@ class Producer:
             Producer.existing_topics.add(self.topic_name)
 
         self.producer = AvroProducer(
-            config=self.broker_properties,
+            config={
+                **self.broker_properties,
+                "schema.registry.url": "http://localhost:8081",
+            },
             default_key_schema=self.key_schema,
             default_value_schema=self.value_schema,
         )

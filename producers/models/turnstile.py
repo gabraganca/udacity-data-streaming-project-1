@@ -38,8 +38,8 @@ class Turnstile(Producer):
                 topic=self.topic_name,
                 key={"timestamp": self.time_millis()},
                 value=dict(
-                    station_id=self.station_id,
-                    station_name=self.station_name,
-                    line=self.color,
+                    station_id=self.station.station_id,
+                    station_name=self.station.name,
+                    line=self.station.color.name,
                 ),
             )

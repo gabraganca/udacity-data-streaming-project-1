@@ -51,6 +51,10 @@ class Producer:
     def create_topic(self):
         """Creates the producer topic"""
         client = AdminClient(self.broker_properties)
+        if self.topic_name in client.list_topics().topics.keys():
+            logger.info("topic %s already exist", self.topic_name)
+            return
+
         futures = client.create_topics(
             [
                 NewTopic(

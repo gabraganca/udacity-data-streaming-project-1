@@ -42,7 +42,7 @@ table = app.Table(
 
 @app.agent(out_topic)
 async def transformed_stations(stations):
-    async for station in stations:
+    async for station in stations.group_by(Station.station_id):
         if station.red:
             color = "red"
         elif station.green:

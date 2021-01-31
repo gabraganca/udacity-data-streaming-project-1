@@ -32,7 +32,7 @@ class Station(Producer):
             topic_name,
             key_schema=Station.key_schema,
             value_schema=Station.value_schema,
-            num_partitions=3,  # A first guess. Needs fine-tuning
+            num_partitions=1,  # A first guess. Needs fine-tuning
             num_replicas=1,  # We are running a one-node cluster on docker
         )
 

@@ -44,6 +44,7 @@ class Producer:
             config={
                 **self.broker_properties,
                 "schema.registry.url": "http://localhost:8081",
+                "group.id": "0",
             },
             default_key_schema=self.key_schema,
             default_value_schema=self.value_schema,

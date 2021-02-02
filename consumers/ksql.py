@@ -30,7 +30,7 @@ WITH (
         station_id,
         count(*) as count
     from turnstile
-    group by station_id
+    group by station_id;
 """
 
 

@@ -38,7 +38,9 @@ class KafkaConsumer:
                     **self.broker_properties,
                     "schema.registry.url": "http://localhost:8081",
                     "group.id": "0",
-                    "auto.offset.reset": "earliest",
+                    "auto.offset.reset": "earliest"
+                    if self.offset_earliest
+                    else "latest",
                 },
             )
         else:
@@ -47,7 +49,9 @@ class KafkaConsumer:
                     **self.broker_properties,
                     "schema.registry.url": "http://localhost:8081",
                     "group.id": "0",
-                    "auto.offset.reset": "earliest",
+                    "auto.offset.reset": "earliest"
+                    if self.offset_earliest
+                    else "latest",
                 }
             )
 

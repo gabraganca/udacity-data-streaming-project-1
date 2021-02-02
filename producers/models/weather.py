@@ -90,5 +90,5 @@ class Weather(Producer):
         logger.debug(
             "sent weather data to kafka, temp: %s, status: %s",
             self.temp,
-            self.status.name,
+            self.status,
         )

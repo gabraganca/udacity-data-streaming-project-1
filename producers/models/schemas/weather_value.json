@@ -9,7 +9,14 @@
     },
     {
       "name": "status",
-      "type": "string"
+      "type": "enum",
+      "symbols": [
+        "sunny",
+        "partly_cloudy",
+        "cloudy",
+        "windy",
+        "precipitation"
+      ]
     }
   ]
 }

@@ -47,7 +47,6 @@ class KafkaConsumer:
             self.consumer = Consumer(
                 {
                     **self.broker_properties,
-                    "schema.registry.url": "http://localhost:8081",
                     "group.id": "0",
                     "auto.offset.reset": "earliest"
                     if self.offset_earliest

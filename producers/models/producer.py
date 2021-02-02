@@ -1,6 +1,7 @@
 """Producer base-class providing common utilites and functionality"""
 import logging
 import time
+import concurrent.futures
 
 # from confluent_kafka import avro
 from confluent_kafka.admin import AdminClient, NewTopic
@@ -55,6 +56,7 @@ class Producer:
             logger.info("topic %s already exist", self.topic_name)
             return
 
+        logger.debug("creating topic %s", self.topic_name)
         futures = client.create_topics(
             [
                 NewTopic(
@@ -64,11 +66,13 @@ class Producer:
                 )
             ]
         )
-
+        logger.debug('waiting result for topic %s creation', self.topic_name)
         for _, future in futures.items():
             try:
-                future.result()
+                future.result(timeout=3)
                 logger.info("topic %s created", self.topic_name)
+            except concurrent.futures.TimeoutError:
+                logger.error("creation of topic %s timed out", self.topic_name)
             except Exception as e:
                 logger.error("failed to create topic %s: %s", self.topic_name, e)
 

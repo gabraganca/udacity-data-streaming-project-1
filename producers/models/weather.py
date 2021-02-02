@@ -78,7 +78,7 @@ class Weather(Producer):
                             "key": {"timestamp": self.time_millis()},
                             "value": {
                                 "temperature": self.temp,
-                                "status": self.status.name,
+                                "status": self.status,
                             },
                         }
                     ],
@@ -90,5 +90,5 @@ class Weather(Producer):
         logger.debug(
             "sent weather data to kafka, temp: %s, status: %s",
             self.temp,
-            self.status,
+            self.status.name,
         )

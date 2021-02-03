@@ -70,7 +70,7 @@ class Producer:
         logger.debug('waiting result for topic %s creation', self.topic_name)
         for _, future in futures.items():
             try:
-                future.result(timeout=3)
+                future.result(timeout=0.05)
                 logger.info("topic %s created", self.topic_name)
             except concurrent.futures.TimeoutError:
                 logger.error("creation of topic %s timed out", self.topic_name)

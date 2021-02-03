@@ -76,10 +76,14 @@ class KafkaConsumer:
         """Polls for a message. Returns 1 if a message was received, 0 otherwise"""
         message = self.consumer.poll(1.0)
         if message is None:
+            self.logger.debug(f"no message received from {message.topic()}")
             return 0
         elif message.error() is not None:
             self.logger.error(f"error from consumer {message.error()}")
         else:
+            self.logger.debug(
+                f"message received from {message.topic()}.Processing it..."
+            )
             self.message_handler(message)
             return 1
 
